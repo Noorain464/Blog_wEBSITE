@@ -32,22 +32,11 @@ export const fetchBlogs = () => {
     };
   };
   
+  
 
-  export const EDIT_BLOG = 'EDIT_BLOG';
-  export const DELETE_BLOG = 'DELETE_BLOG';
-  
-  export const addBlog = (blog) => ({
+export const addBlog = (blog) => {
+  return {
     type: ADD_BLOG,
-    payload: blog,
-  });
-  
-  export const editBlog = (id, updatedBlog) => ({
-    type: EDIT_BLOG,
-    payload: { id, updatedBlog },
-  });
-  
-  export const deleteBlog = (id) => ({
-    type: DELETE_BLOG,
-    payload: id,
-  });
-  
+    payload: blog
+  };
+};

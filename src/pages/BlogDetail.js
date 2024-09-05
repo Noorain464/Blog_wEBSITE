@@ -1,41 +1,34 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { Container, Typography, Box, Button } from '@mui/material';
-import { deleteBlog } from '../redux/Action';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Container, Typography, Box } from '@mui/material';
 
 const BlogDetail = () => {
-  const { id } = useParams();
-  const blogs = useSelector((state) => state.blogs);
-  const dispatch = useDispatch();
-  const blog = blogs.find((b) => b.id.toString() === id);
+  const { id } = useParams(); 
+  const blogs = useSelector((state) => state.blog.blogs);
+  const blog = blogs.find((b) => b.id.toString() === id); 
 
-  const handleDelete = () => {
-    dispatch(deleteBlog(blog.id));
-  };
-
-  if (!blog) return <Typography variant="h6">Blog not found.</Typography>;
+  if (!blog) {
+    return <Typography variant="h6">Blog not found.</Typography>;
+  }
 
   return (
-    <Container maxWidth="md">
-      <Typography variant="h4" gutterBottom>
+    <Container maxWidth="md" sx={{ marginTop: 4 }}>
+      <Typography variant="h4" component="h1" gutterBottom>
         {blog.title}
       </Typography>
-      <Typography variant="subtitle1" color="textSecondary">
+      <Typography variant="subtitle1" color="textSecondary" gutterBottom>
         By {blog.author} | Published on {blog.date}
       </Typography>
-      <Box component="img" src={blog.image} alt={blog.title} sx={{ width: '100%', height: 'auto', marginBottom: 4 }} />
-      <Typography variant="body1" component="div" gutterBottom>
+      <Box
+        component="img"
+        src={blog.image}
+        alt={blog.title}
+        sx={{ width: '100%', height: 'auto', marginBottom: 4 }}
+      />
+      <Typography variant="body1" component="div">
         {blog.content}
       </Typography>
-      <Button variant="contained" color="secondary" onClick={handleDelete}>
-        Delete Blog
-      </Button>
-      <Link to={`/edit/${id}`}>
-        <Button variant="contained" color="primary" sx={{ marginLeft: 2 }}>
-          Edit Blog
-        </Button>
-      </Link>
     </Container>
   );
 };
