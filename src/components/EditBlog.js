@@ -1,51 +1,45 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { addBlog } from '../redux/Action';
-import { Container, TextField, Button, Typography, Box, MenuItem, useTheme } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { editBlog } from '../redux/Action';
+import { Container, TextField, Button, Typography, Box, MenuItem } from '@mui/material';
 
-const CreateBlog = () => {
+const EditBlog = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const blog = useSelector((state) => state.blog.blogs.find((blog) => blog.id === parseInt(id)));
+
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const theme = useTheme();
+
+  useEffect(() => {
+    if (blog) {
+      setTitle(blog.title);
+      setAuthor(blog.author);
+      setContent(blog.content);
+      setImage(blog.image);
+      setCategory(blog.category);
+    }
+  }, [blog]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !author || !content || !category) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    const newBlog = {
-      id: Date.now(),
-      title,
-      author,
-      content,
-      image,
-      category,
-      date: new Date().toLocaleDateString(),
-    };
-    dispatch(addBlog(newBlog));
-    navigate('/'); 
+    const updatedBlog = { id: blog.id, title, author, content, image, category, date: blog.date };
+    dispatch(editBlog(updatedBlog));
+    navigate(`/blog/${id}`);
   };
 
+  if (!blog) return <div>Loading...</div>;
+
   return (
-    <Container 
-      maxWidth="md" 
-      sx={{ 
-        marginTop: 4, 
-        backgroundColor: theme.palette.background.paper, 
-        padding: 4, 
-        borderRadius: 2, 
-        boxShadow: 3 
-      }}
-    >
+    <Container maxWidth="md" sx={{ marginTop: 4 }}>
       <Typography variant="h4" gutterBottom align="center">
-        Create a New Blog
+        Edit Blog
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -97,7 +91,7 @@ const CreateBlog = () => {
         />
         <Box sx={{ textAlign: 'center', marginTop: 3 }}>
           <Button variant="contained" color="primary" type="submit" size="large">
-            Submit Blog
+            Update Blog
           </Button>
         </Box>
       </form>
@@ -105,4 +99,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default EditBlog;

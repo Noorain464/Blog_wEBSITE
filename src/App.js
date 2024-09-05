@@ -13,6 +13,7 @@ import CategoryFilter from './components/FilterCategory';
 import { Theme } from '../src/components/Theme';
 import { Container, Typography} from '@mui/material';
 import { useLocation } from 'react-router-dom'; 
+import EditBlog from './components/EditBlog';
 
 const AppContent = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,6 +47,7 @@ const AppContent = () => {
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/create-blog" element={<CreateBlog />} />
+        <Route path="/edit-blog/:id" element={<EditBlog />} />
       </Routes>
     </Container>
   );

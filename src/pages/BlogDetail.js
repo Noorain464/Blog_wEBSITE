@@ -1,16 +1,28 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Container, Typography, Box } from '@mui/material';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteBlog } from '../redux/Action';
+import { Container, Typography, Box, Button } from '@mui/material';
 
 const BlogDetail = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blog.blogs);
-  const blog = blogs.find((b) => b.id.toString() === id); 
+  const blog = blogs.find((b) => b.id.toString() === id);
 
   if (!blog) {
     return <Typography variant="h6">Blog not found.</Typography>;
   }
+
+  const handleDelete = () => {
+    dispatch(deleteBlog(blog.id));
+    navigate('/');
+  };
+
+  const handleEdit = () => {
+    navigate(`/edit-blog/${blog.id}`);
+  };
 
   return (
     <Container maxWidth="md" sx={{ marginTop: 4 }}>
@@ -29,6 +41,14 @@ const BlogDetail = () => {
       <Typography variant="body1" component="div">
         {blog.content}
       </Typography>
+      <Box sx={{ marginTop: 3 }}>
+        <Button variant="contained" color="primary" onClick={handleEdit} sx={{ marginRight: 2 }}>
+          Edit Blog
+        </Button>
+        <Button variant="contained" color="secondary" onClick={handleDelete}>
+          Delete Blog
+        </Button>
+      </Box>
     </Container>
   );
 };
