@@ -41,7 +41,10 @@ const CreateBlog = () => {
         backgroundColor: theme.palette.background.paper, 
         padding: 4, 
         borderRadius: 2, 
-        boxShadow: 3 
+        boxShadow: 3,
+        '@media (max-width:600px)': {
+          padding: 2,
+        }
       }}
     >
       <Typography 

@@ -20,7 +20,7 @@ const AppContent = () => {
     const location = useLocation();
 
     return (
-        <Container maxWidth="md" sx={{ paddingTop: 4 }}>
+        <Container maxWidth="md" sx={{ paddingTop: 4, paddingX: 2, '@media (max-width:600px)': { paddingTop: 2 } }}>
             {location.pathname !== '/create-blog' && (
                 <Box sx={{ mb: 4 }}>
                     <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
