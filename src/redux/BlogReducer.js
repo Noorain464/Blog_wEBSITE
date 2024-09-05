@@ -1,7 +1,7 @@
-import { FETCH_BLOGS, ADD_BLOG } from './Action';
+import { FETCH_BLOGS, ADD_BLOG, EDIT_BLOG, DELETE_BLOG } from './Action';
 
 const initialState = {
-  blogs: []
+  blogs: [],
 };
 
 const blogReducer = (state = initialState, action) => {
@@ -9,12 +9,24 @@ const blogReducer = (state = initialState, action) => {
     case FETCH_BLOGS:
       return {
         ...state,
-        blogs: action.payload
+        blogs: action.payload,
       };
     case ADD_BLOG:
       return {
         ...state,
-        blogs: [...state.blogs, action.payload]
+        blogs: [...state.blogs, action.payload],
+      };
+    case EDIT_BLOG:
+      return {
+        ...state,
+        blogs: state.blogs.map((blog) =>
+          blog.id === action.payload.id ? action.payload : blog
+        ),
+      };
+    case DELETE_BLOG:
+      return {
+        ...state,
+        blogs: state.blogs.filter((blog) => blog.id !== action.payload),
       };
     default:
       return state;

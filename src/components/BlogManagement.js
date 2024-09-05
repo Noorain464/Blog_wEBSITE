@@ -1,13 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardContent, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteBlog } from './Action';
+import { Button, Card, CardContent, Typography } from '@mui/material';
 
-const FeaturedBlogs = () => {
+const BlogManagement = () => {
+  const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blog.blogs || []);
+
+  const handleDelete = (id) => {
+    dispatch(deleteBlog(id));
+  };
 
   return (
     <div>
-      {blogs.slice(0, 3).map((blog) => (
+      {blogs.map((blog) => (
         <Card key={blog.id} variant="outlined" sx={{ marginBottom: 2 }}>
           <CardContent>
             <Typography variant="h5" component="div">
@@ -19,6 +25,14 @@ const FeaturedBlogs = () => {
             <Typography variant="body1" sx={{ marginTop: 1 }}>
               {blog.content.substring(0, 100)}...
             </Typography>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleDelete(blog.id)}
+              sx={{ marginTop: 2 }}
+            >
+              Delete
+            </Button>
           </CardContent>
         </Card>
       ))}
@@ -26,4 +40,4 @@ const FeaturedBlogs = () => {
   );
 };
 
-export default FeaturedBlogs;
+export default BlogManagement;

@@ -27,8 +27,8 @@ const BlogList = ({ searchQuery, category }) => {
         <BlogPost
           key={blog.id}
           id={blog.id}
-          title={<Highlight text={blog.title} query={searchQuery} />} // Use Highlight for title
-          excerpt={<Highlight text={blog.content.substring(0, 100) + '...'} query={searchQuery} />} // Use Highlight for excerpt
+          title={<Highlight text={blog.title} query={searchQuery} />}
+          excerpt={<Highlight text={blog.content.substring(0, 100) + '...'} query={searchQuery} />}
           date={blog.date}
         />
       ))}

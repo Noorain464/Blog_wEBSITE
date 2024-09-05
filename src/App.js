@@ -11,6 +11,7 @@ import SearchBar from './components/SearchBar';
 import CategoryFilter from './components/FilterCategory';
 import { Theme } from '../src/components/Theme';
 import { Container, Typography } from '@mui/material';
+import BlogForm from '../src/components/BlogForm';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,6 +43,7 @@ function App() {
             </Routes>
           </Container>
         </Router>
+        <BlogForm/>
       </Provider>
     </Theme>
   );
