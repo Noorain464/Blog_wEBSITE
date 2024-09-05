@@ -18,10 +18,12 @@ const AppContent = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [category, setCategory] = useState('all');
     const location = useLocation();
+    const showSearchAndFilter = !location.pathname.startsWith('/blog/') && location.pathname !== '/create-blog';
+
 
     return (
-        <Container maxWidth="md" sx={{ paddingTop: 4, paddingX: 2, '@media (max-width:600px)': { paddingTop: 2 } }}>
-            {location.pathname !== '/create-blog' && (
+        <Container maxWidth="md" sx={{ paddingTop: 4 }}>
+            {showSearchAndFilter && (
                 <Box sx={{ mb: 4 }}>
                     <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
                     <CategoryFilter category={category} setCategory={setCategory} />
