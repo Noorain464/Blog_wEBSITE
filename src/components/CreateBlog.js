@@ -44,7 +44,15 @@ const CreateBlog = () => {
         boxShadow: 3 
       }}
     >
-      <Typography variant="h4" gutterBottom align="center">
+      <Typography 
+        variant="h4" 
+        gutterBottom 
+        align="center"
+        sx={{
+          color: theme.palette.mode === 'dark' ? '#ffeb3b' : '#ff6f61',
+          fontWeight: 'bold',
+        }}
+      >
         Create a New Blog
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -96,7 +104,20 @@ const CreateBlog = () => {
           sx={{ marginBottom: 2 }}
         />
         <Box sx={{ textAlign: 'center', marginTop: 3 }}>
-          <Button variant="contained" color="primary" type="submit" size="large">
+          <Button 
+            variant="contained" 
+            color="primary" 
+            type="submit" 
+            size="large"
+            sx={{
+              backgroundColor: theme.palette.mode === 'dark' ? '#ff6f61' : '#ff4081',
+              '&:hover': {
+                backgroundColor: theme.palette.mode === 'dark' ? '#ff9a8b' : '#f50057',
+              },
+              borderRadius: '30px',
+              fontWeight: 'bold',
+            }}
+          >
             Submit Blog
           </Button>
         </Box>

@@ -25,15 +25,7 @@ const BlogDetail = () => {
   };
 
   return (
-    <Container 
-      maxWidth="md" 
-      sx={{ 
-        marginTop: 4,
-        padding: { xs: 2, sm: 4 },
-        borderRadius: 2,
-        boxShadow: 3
-      }}
-    >
+    <Container maxWidth="md" sx={{ marginTop: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
         {blog.title}
       </Typography>
@@ -49,11 +41,21 @@ const BlogDetail = () => {
       <Typography variant="body1" component="div">
         {blog.content}
       </Typography>
-      <Box sx={{ marginTop: 3, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
-        <Button variant="contained" color="primary" onClick={handleEdit} sx={{ flexGrow: 1 }}>
+      <Box sx={{ marginTop: 3 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleEdit}
+          sx={{ marginRight: 2, backgroundColor: '#ff6f61', '&:hover': { backgroundColor: '#ff9a8b' } }}
+        >
           Edit Blog
         </Button>
-        <Button variant="contained" color="secondary" onClick={handleDelete} sx={{ flexGrow: 1 }}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleDelete}
+          sx={{ backgroundColor: '#ff4081', '&:hover': { backgroundColor: '#f50057' } }}
+        >
           Delete Blog
         </Button>
       </Box>
@@ -62,4 +64,3 @@ const BlogDetail = () => {
 };
 
 export default BlogDetail;
- 
