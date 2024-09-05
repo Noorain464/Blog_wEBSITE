@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Box, useMediaQuery } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../components/Theme';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -8,6 +8,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 const Navbar = () => {
   const { toggleTheme, mode } = useContext(ThemeContext);
   const categories = ['Technology', 'Travel', 'Food', 'Lifestyle'];
+  const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   return (
     <AppBar
@@ -18,7 +19,7 @@ const Navbar = () => {
         marginBottom: 4,
       }}
     >
-      <Toolbar>
+      <Toolbar sx={{ flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center' }}>
         <Typography
           variant="h6"
           sx={{
@@ -26,13 +27,22 @@ const Navbar = () => {
             fontWeight: 'bold',
             color: '#ffffff',
             textDecoration: 'none',
+            mb: isMobile ? 2 : 0,
           }}
           component={Link}
           to="/"
         >
           Blog Website
         </Typography>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            gap: 2, 
+            flexWrap: 'wrap', 
+            justifyContent: isMobile ? 'center' : 'flex-start',
+            mb: isMobile ? 2 : 0, // margin-bottom for mobile
+          }}
+        >
           {categories.map((category, index) => (
             <Button
               key={index}
@@ -44,6 +54,7 @@ const Navbar = () => {
                 borderRadius: '20px',
                 textTransform: 'capitalize',
                 fontSize: '14px',
+                padding: isMobile ? '4px 10px' : '8px 20px', 
                 '&:hover': {
                   backgroundColor: mode === 'dark' ? '#555' : '#ffffff33',
                 },
@@ -58,7 +69,7 @@ const Navbar = () => {
           component={Link}
           to="/create-blog"
           sx={{
-            marginLeft: 2,
+            marginLeft: isMobile ? 0 : 2,
             padding: '8px 20px',
             color: mode === 'dark' ? '#333' : '#ffffff',
             backgroundColor: mode === 'dark' ? '#ffeb3b' : '#ff4081',
@@ -70,6 +81,7 @@ const Navbar = () => {
             '&:hover': {
               backgroundColor: mode === 'dark' ? '#fdd835' : '#f50057',
             },
+            mb: isMobile ? 2 : 0, // margin-bottom for mobile
           }}
         >
           Create Blog
@@ -78,7 +90,12 @@ const Navbar = () => {
         <IconButton
           color="inherit"
           onClick={toggleTheme}
-          sx={{ ml: 2, borderRadius: '50%', backgroundColor: mode === 'dark' ? '#555' : '#ffffff33', padding: '8px' }}
+          sx={{ 
+            ml: isMobile ? 0 : 2, 
+            borderRadius: '50%', 
+            backgroundColor: mode === 'dark' ? '#555' : '#ffffff33', 
+            padding: '8px' 
+          }}
         >
           {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
