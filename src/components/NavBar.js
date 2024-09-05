@@ -13,8 +13,8 @@ const Navbar = () => {
     <AppBar
       position="static"
       sx={{
-        background: mode === 'dark' ? 'linear-gradient(45deg, #333, #555)' : 'linear-gradient(45deg, #6a11cb, #2575fc)',
-        boxShadow: 'none',
+        background: mode === 'dark' ? 'linear-gradient(45deg, #2e2e2e, #4a4a4a)' : 'linear-gradient(45deg, #ff6f61, #ff9a8b)',
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
         marginBottom: 4,
       }}
     >
@@ -45,7 +45,7 @@ const Navbar = () => {
                 textTransform: 'capitalize',
                 fontSize: '14px',
                 '&:hover': {
-                  backgroundColor: mode === 'dark' ? '#444' : '#ffffff33',
+                  backgroundColor: mode === 'dark' ? '#555' : '#ffffff33',
                 },
               }}
             >
@@ -61,14 +61,14 @@ const Navbar = () => {
             marginLeft: 2,
             padding: '8px 20px',
             color: mode === 'dark' ? '#333' : '#ffffff',
-            backgroundColor: mode === 'dark' ? '#ffcc00' : '#ff6b6b',
+            backgroundColor: mode === 'dark' ? '#ffeb3b' : '#ff4081',
             borderRadius: '30px',
             fontWeight: 'bold',
             fontSize: '14px',
-            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
             textTransform: 'uppercase',
             '&:hover': {
-              backgroundColor: mode === 'dark' ? '#ffa31a' : '#ff4949',
+              backgroundColor: mode === 'dark' ? '#fdd835' : '#f50057',
             },
           }}
         >
@@ -78,7 +78,7 @@ const Navbar = () => {
         <IconButton
           color="inherit"
           onClick={toggleTheme}
-          sx={{ ml: 2, borderRadius: '50%', backgroundColor: mode === 'dark' ? '#444' : '#ffffff33', padding: '8px' }}
+          sx={{ ml: 2, borderRadius: '50%', backgroundColor: mode === 'dark' ? '#555' : '#ffffff33', padding: '8px' }}
         >
           {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
