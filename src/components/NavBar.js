@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../components/Theme';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -7,8 +7,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const Navbar = () => {
   const { toggleTheme, mode } = useContext(ThemeContext);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const categories = ['Technology', 'Travel', 'Food', 'Lifestyle'];
 
   return (
     <AppBar
@@ -17,11 +16,9 @@ const Navbar = () => {
         background: mode === 'dark' ? 'linear-gradient(45deg, #2e2e2e, #4a4a4a)' : 'linear-gradient(45deg, #ff6f61, #ff9a8b)',
         boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
         marginBottom: 4,
-        maxWidth: '100%',
-        overflow: 'hidden',
       }}
     >
-      <Toolbar sx={{ flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', flexWrap: 'wrap' }}>
+      <Toolbar>
         <Typography
           variant="h6"
           sx={{
@@ -29,24 +26,14 @@ const Navbar = () => {
             fontWeight: 'bold',
             color: '#ffffff',
             textDecoration: 'none',
-            mb: isMobile ? 2 : 0, // margin-bottom for mobile
-            fontSize: isMobile ? '1.2rem' : '1.5rem',
           }}
           component={Link}
           to="/"
         >
           Blog Website
         </Typography>
-        <Box 
-          sx={{ 
-            display: 'flex', 
-            gap: 1, // reduced gap for mobile
-            flexWrap: 'wrap', 
-            justifyContent: isMobile ? 'center' : 'flex-start',
-            mb: isMobile ? 2 : 0, // margin-bottom for mobile
-          }}
-        >
-          {['Technology', 'Travel', 'Food', 'Lifestyle'].map((category, index) => (
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          {categories.map((category, index) => (
             <Button
               key={index}
               color="inherit"
@@ -56,8 +43,8 @@ const Navbar = () => {
                 color: '#ffffff',
                 borderRadius: '20px',
                 textTransform: 'capitalize',
-                fontSize: isMobile ? '12px' : '14px', // responsive font size
-                padding: isMobile ? '4px 8px' : '8px 20px', // responsive padding
+                fontSize: { xs: '12px', sm: '14px' }, // Responsive font size
+                padding: { xs: '4px 8px', sm: '6px 12px' }, // Responsive padding
                 '&:hover': {
                   backgroundColor: mode === 'dark' ? '#555' : '#ffffff33',
                 },
@@ -72,17 +59,18 @@ const Navbar = () => {
           component={Link}
           to="/create-blog"
           sx={{
-            marginLeft: isMobile ? 0 : 2,
-            padding: isMobile ? '6px 12px' : '8px 20px', // responsive padding
+            marginLeft: 2,
+            padding: { xs: '6px 12px', sm: '8px 20px' }, // Responsive padding
             color: mode === 'dark' ? '#333' : '#ffffff',
             backgroundColor: mode === 'dark' ? '#ffeb3b' : '#ff4081',
             borderRadius: '30px',
             fontWeight: 'bold',
-            fontSize: isMobile ? '12px' : '14px', // responsive font size
+            fontSize: { xs: '12px', sm: '14px' }, // Responsive font size
             boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
             textTransform: 'uppercase',
-            mb: isMobile ? 2 : 0, // margin-bottom for mobile
-            width: isMobile ? '100%' : 'auto', // full width on mobile
+            '&:hover': {
+              backgroundColor: mode === 'dark' ? '#fdd835' : '#f50057',
+            },
           }}
         >
           Create Blog
@@ -91,12 +79,7 @@ const Navbar = () => {
         <IconButton
           color="inherit"
           onClick={toggleTheme}
-          sx={{ 
-            ml: isMobile ? 0 : 2, 
-            borderRadius: '50%', 
-            backgroundColor: mode === 'dark' ? '#555' : '#ffffff33', 
-            padding: '8px' 
-          }}
+          sx={{ ml: 2, borderRadius: '50%', backgroundColor: mode === 'dark' ? '#555' : '#ffffff33', padding: '8px' }}
         >
           {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
