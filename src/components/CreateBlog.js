@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addBlog } from '../redux/Action';
-import { Container, TextField, Button, Typography, Box, MenuItem } from '@mui/material';
+import { Container, TextField, Button, Typography, Box, MenuItem, useTheme } from '@mui/material';
 
 const CreateBlog = () => {
   const [title, setTitle] = useState('');
@@ -12,6 +12,7 @@ const CreateBlog = () => {
   const [category, setCategory] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +34,16 @@ const CreateBlog = () => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: 4, backgroundColor: '#fff', padding: 4, borderRadius: 2, boxShadow: 3 }}>
+    <Container 
+      maxWidth="md" 
+      sx={{ 
+        marginTop: 4, 
+        backgroundColor: theme.palette.background.paper, 
+        padding: 4, 
+        borderRadius: 2, 
+        boxShadow: 3 
+      }}
+    >
       <Typography variant="h4" gutterBottom align="center">
         Create a New Blog
       </Typography>
