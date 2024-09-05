@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import React, { useContext } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -25,7 +24,7 @@ const Navbar = () => {
           sx={{
             flexGrow: 1,
             fontWeight: 'bold',
-            color: mode === 'dark' ? '#ffffff' : '#ffffff',
+            color: '#ffffff',
             textDecoration: 'none',
           }}
           component={Link}
@@ -41,7 +40,7 @@ const Navbar = () => {
               component={Link}
               to={`/category/${category.toLowerCase()}`}
               sx={{
-                color: mode === 'dark' ? '#ffffff' : '#ffffff',
+                color: '#ffffff',
                 borderRadius: '20px',
                 textTransform: 'capitalize',
                 fontSize: '14px',
@@ -54,6 +53,28 @@ const Navbar = () => {
             </Button>
           ))}
         </Box>
+
+        <Button
+          component={Link}
+          to="/create-blog"
+          sx={{
+            marginLeft: 2,
+            padding: '8px 20px',
+            color: mode === 'dark' ? '#333' : '#ffffff',
+            backgroundColor: mode === 'dark' ? '#ffcc00' : '#ff6b6b',
+            borderRadius: '30px',
+            fontWeight: 'bold',
+            fontSize: '14px',
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+            textTransform: 'uppercase',
+            '&:hover': {
+              backgroundColor: mode === 'dark' ? '#ffa31a' : '#ff4949',
+            },
+          }}
+        >
+          Create Blog
+        </Button>
+
         <IconButton
           color="inherit"
           onClick={toggleTheme}
